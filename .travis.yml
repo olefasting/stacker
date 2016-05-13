@@ -1,0 +1,16 @@
+language: go
+sudo: false
+go:
+- 1.6.2
+- tip
+before_install:
+- go get github.com/mattn/goveralls
+- go get golang.org/x/net/context
+- go get github.com/stretchr/testify/assert
+- go get github.com/olefasting/httpctx
+- go generate
+script:
+- "$HOME/gopath/bin/goveralls -service=travis-ci"
+env:
+  global:
+    secure: lRgnLO1k4kFzuE8IvWWtMY9ZPNhY4YtB+Ml3UWElto0wG5/jKMos/CAlz2IJDkOAYiAuSCwILJy16p4Wot7Z0iG2ZvL3rtag91YWtYvjQU3CJ/dCd4iqCwHsX1NARkxEfdd+brNUlP1UkSu8y6+SXyt0j4lyxHazIG9+3e0v7Fw4aJq0+Xy2n6uq2YrtuXBWBHhSEHYIZUvWjTbyijYAUw8frL5uugrnvrt9aujrZDWJVTY3HaaJf90azVV6+5vxi47vqL5fGp7CZt7FjwAYkhtC2VupjqwSTiwK/YLcNtCHsqo7Qhvl5jy7DthNEL2RRTiogwM0AOnF4alPPg9jSoIFTTUFr3Q9WVGI92PKX2g6mlcReIXq+EEju1FSDFyZnvuLzaXgLc7f0iB3Iq3yewefwvvrq3NepGaD7zsx8RahDEzICVbYt1D4JJj1ytvNGPUeZT4I0jzrL1uIwrCQj8uIWOIMuBthiozCaUYy8mjHQK6XU8ZVvxjyPYZjPD1643lFPB+Z44o1NugLiE17oDT/DWGg8b8l85VdgroTzJVob/BTEkyUwycZOt+PmvVKZQ9AU5NvN9eP3JeRo70iIJWvchOEUYVHc1Y8bm6AJp4G3voIk/sZJ38yjMe0FJ9XlIJwc0vO/W7lanKMuKNBJur4bnqzqZdsTspJTxAAWMk=

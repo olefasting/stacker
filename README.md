@@ -1,12 +1,17 @@
 # stacker
 
-Package **stacker** provides middleware stacksing for httpctx handlers.
-This is more or less a rewrite of justinas/alice, so it works pretty much the same, except for the removal of the Extend method.
-Since Stack is type []Middleware, you can just pass it as an argument to Append, and it will be unpacked automatically.
+[![GoDoc](https://godoc.org/github.com/olefasting/stacker?status.svg)](https://godoc.org/github.com/olefasting/stacker) 
+[![GoCover](http://gocover.io/_badge/github.com/olefasting/stacker)](http://gocover.io/github.com/olefasing/stacker)
+[![Coveralls](https://coveralls.io/repos/github/olefasting/stacker/badge.svg?branch=master)](https://coveralls.io/github/olefasting/stacker?branch=master)
+[![Build Status](https://travis-ci.org/olefasting/stacker.svg?branch=master)](https://travis-ci.org/olefasting/stacker)
+
+Package **stacker** provides middleware stacking for [httpctx](http://github.com/olefasting/httpctx) handlers.
+This is more or less a rewrite of [justinas/alice](https://github.com/justinas/alice), so it works pretty much the same, except for the removal of the `Extend` and the `ThenFunc` methods.
+Since `Stack` is type `[]Middleware`, you can just pass it as an argument to `Append`, and it will be unpacked automatically.
 
 ## Documentation
 
-Create new stacks by calling New, add middleware by calling Append. The stacks are immutable, so you can create stacks for various purposes and mix and match at the end points.
+Create new stacks by calling `New`, add middleware by calling `Append`. The stacks are **immutable**, so you can create stacks for various purposes and mix and match at the end points.
 
 This depends on [httpctx](http://github.com/olefasting/httpctx)
 
