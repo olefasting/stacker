@@ -1,3 +1,4 @@
+// Package stacker provides middleware stacking for httpctx handlers
 package stacker
 
 import "github.com/olefasting/httpctx"

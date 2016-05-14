@@ -1,9 +1,8 @@
 # stacker
 
-[![GoDoc](https://godoc.org/github.com/olefasting/stacker?status.svg)](https://godoc.org/github.com/olefasting/stacker) 
-[![GoCover](http://gocover.io/_badge/github.com/olefasting/stacker)](http://gocover.io/github.com/olefasing/stacker)
+[![Build Status](https://drone.io/github.com/olefasting/stacker/status.png)](https://drone.io/github.com/olefasting/stacker/latest)
 [![Coveralls](https://coveralls.io/repos/github/olefasting/stacker/badge.svg?branch=master)](https://coveralls.io/github/olefasting/stacker?branch=master)
-[![Build Status](https://travis-ci.org/olefasting/stacker.svg?branch=master)](https://travis-ci.org/olefasting/stacker)
+[![GoDoc](https://godoc.org/github.com/olefasting/stacker?status.svg)](https://godoc.org/github.com/olefasting/stacker)
 
 Package **stacker** provides middleware stacking for [httpctx](http://github.com/olefasting/httpctx) handlers.
 This is more or less a rewrite of [justinas/alice](https://github.com/justinas/alice), so it works pretty much the same, except for the removal of the `Extend` and the `ThenFunc` methods.
@@ -63,7 +62,7 @@ func main() {
 type appHandler struct{}
 
 // Handler method
-func (h *appHandler) ServeHTTPCtx(ctx context.Context, rw http.ResponseWriter, req *http.Request) {
+func (h *appHandler) ServeHTTPCtx(ctx context.Context, rw httpctx.ResponseWriter, req httpctx.Request) {
 	// Get something from context
 	body := ctx.Value("key").(string)
 
@@ -75,7 +74,7 @@ func (h *appHandler) ServeHTTPCtx(ctx context.Context, rw http.ResponseWriter, r
 
 // Middleware1
 func mw1(next httpctx.Handler) httpctx.Handler {
-	fn := func(ctx context.Context, rw http.ResponseWriter, req *http.Request) {
+	fn := func(ctx context.Context, rw httpctx.ResponseWriter, req httpctx.Request) {
 		// Add value to context
 		newctx := context.WithValue(ctx, "key", "some thing")
 
@@ -89,7 +88,7 @@ func mw1(next httpctx.Handler) httpctx.Handler {
 
 // Middleware2
 func mw2(next httpctx.Handler) httpctx.Handler {
-	fn := func(ctx context.Context, rw http.ResponseWriter, req *http.Request) {
+	fn := func(ctx context.Context, rw httpctx.ResponseWriter, req httpctx.Request) {
 		// Add value to context
 		newctx := context.WithValue(ctx, "key", "some other thing")
 
@@ -100,7 +99,6 @@ func mw2(next httpctx.Handler) httpctx.Handler {
 	// Return
 	return httpctx.HandlerFunc(fn)
 }
-
 ```
 
 Licence MIT
