@@ -1,6 +1,6 @@
 # stacker
 
-[![Build Status](https://drone.io/github.com/olefasting/stacker/status.png)](https://drone.io/github.com/olefasting/stacker/latest)
+[![Build Status](https://travis-ci.org/olefasting/stacker.svg?branch=master)](https://travis-ci.org/olefasting/stacker) 
 [![Coveralls](https://coveralls.io/repos/github/olefasting/stacker/badge.svg?branch=master)](https://coveralls.io/github/olefasting/stacker?branch=master)
 [![GoDoc](https://godoc.org/github.com/olefasting/stacker?status.svg)](https://godoc.org/github.com/olefasting/stacker)
 
@@ -10,7 +10,7 @@ Since `Stack` is type `[]Middleware`, you can just pass it as an argument to `Ap
 
 ## Documentation
 
-Create new stacks by calling `New`, add middleware by calling `Append`. The stacks are **immutable**, so you can create stacks for various purposes and mix and match at the end points.
+Create new stacks by calling `New` and add middleware by calling `Append`. The stacks are **immutable**, so you can create stacks for various purposes and mix and match at the end points.
 
 This depends on [httpctx](http://github.com/olefasting/httpctx)
 

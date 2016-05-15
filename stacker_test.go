@@ -31,6 +31,8 @@ func testTagger(tag string) stacker.Middleware {
 
 // Test that the stacker are immutable
 func TestStackMutability(t *testing.T) {
+	t.Parallel()
+
 	// Create test stacker
 	s1 := stacker.New(testTagger("1"), testTagger("2"), testTagger("3"))
 	s2 := s1.Append(testTagger("4"), testTagger("5"))
@@ -42,6 +44,8 @@ func TestStackMutability(t *testing.T) {
 
 // Check that handler order is right
 func TestHandlerOrder(t *testing.T) {
+	t.Parallel()
+
 	// Create test stacker
 	s1 := stacker.New(testTagger("1"), testTagger("2"))
 	s2 := s1.Append(testTagger("3"), testTagger("4"), testTagger("5"))
@@ -62,6 +66,8 @@ func TestHandlerOrder(t *testing.T) {
 
 // Test passing nil to Then
 func TestNilPassedToThen(t *testing.T) {
+	t.Parallel()
+
 	s := stacker.New()
 	h := s.Then(nil)
 	assert.True(t, h == nil)
