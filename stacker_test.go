@@ -16,15 +16,14 @@ import (
 
 type testHandler struct{}
 
-func (h *testHandler) ServeHTTPCtx(ctx context.Context, rw httpctx.ResponseWriter, req httpctx.Request) {
+func (h *testHandler) ServeHTTPCtx(ctx context.Context, rw http.ResponseWriter, req *http.Request) {
 	return
 }
 
 func testTagger(tag string) stacker.Middleware {
 	return func(h httpctx.Handler) httpctx.Handler {
-		return httpctx.HandlerFunc(func(ctx context.Context, rw httpctx.ResponseWriter, req httpctx.Request) {
+		return httpctx.HandlerFunc(func(ctx context.Context, rw http.ResponseWriter, req *http.Request) {
 			rw.Write([]byte(tag))
-			h.ServeHTTPCtx(ctx, rw, req)
 		})
 	}
 }
