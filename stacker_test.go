@@ -24,6 +24,7 @@ func testTagger(tag string) stacker.Middleware {
 	return func(h httpctx.Handler) httpctx.Handler {
 		return httpctx.HandlerFunc(func(ctx context.Context, rw http.ResponseWriter, req *http.Request) {
 			rw.Write([]byte(tag))
+			h.ServeHTTPCtx(ctx, rw, req)
 		})
 	}
 }
