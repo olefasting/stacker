@@ -6,25 +6,22 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"golang.org/x/net/context"
-
 	"github.com/stretchr/testify/assert"
 
-	"github.com/olefasting/httpctx"
 	"github.com/olefasting/stacker"
 )
 
 type testHandler struct{}
 
-func (h *testHandler) ServeHTTPCtx(ctx context.Context, rw http.ResponseWriter, req *http.Request) {
+func (h *testHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	return
 }
 
 func testTagger(tag string) stacker.Middleware {
-	return func(h httpctx.Handler) httpctx.Handler {
-		return httpctx.HandlerFunc(func(ctx context.Context, rw http.ResponseWriter, req *http.Request) {
+	return func(h http.Handler) http.Handler {
+		return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 			rw.Write([]byte(tag))
-			h.ServeHTTPCtx(ctx, rw, req)
+			h.ServeHTTP(rw, req)
 		})
 	}
 }
@@ -55,12 +52,11 @@ func TestHandlerOrder(t *testing.T) {
 		log.Fatal(err)
 	}
 	// Chack that tag order match the strings
-	ctx := context.Background()
 	rw := httptest.NewRecorder()
-	s1.Then(&testHandler{}).ServeHTTPCtx(ctx, rw, req)
+	s1.Then(&testHandler{}).ServeHTTP(rw, req)
 	assert.True(t, rw.Body.String() == "12")
 	rw = httptest.NewRecorder()
-	s2.Then(&testHandler{}).ServeHTTPCtx(ctx, rw, req)
+	s2.Then(&testHandler{}).ServeHTTP(rw, req)
 	assert.True(t, rw.Body.String() == "12345")
 }
 

@@ -5,9 +5,7 @@ go:
 - tip
 before_install:
 - go get github.com/mattn/goveralls
-- go get golang.org/x/net/context
 - go get github.com/stretchr/testify/assert
-- go get github.com/olefasting/httpctx
 - go generate
 script:
 - "$HOME/gopath/bin/goveralls -service=travis-ci"
